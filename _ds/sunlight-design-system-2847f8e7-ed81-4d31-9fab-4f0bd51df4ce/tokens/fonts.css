@@ -1,0 +1,8 @@
+/* ==========================================================================
+   Sunlight — Webfonts
+   Figtree is the Sunlight brand typeface; JetBrains Mono for code/numerics.
+   Both are real Google Fonts — pulling the hosted @font-face declarations in
+   via @import keeps the binaries CDN-served and the declarations in the
+   styles.css closure (so the compiler discovers them as the system's fonts).
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');

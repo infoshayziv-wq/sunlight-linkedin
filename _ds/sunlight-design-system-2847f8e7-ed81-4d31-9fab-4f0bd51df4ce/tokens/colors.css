@@ -1,0 +1,58 @@
+/* ==========================================================================
+   Sunlight — Color tokens
+   Base palette + semantic aliases. Signature: Sunlight yellow #FFD503.
+   Source of truth: sunlightapi.com computed styles.
+   ========================================================================== */
+:root {
+  /* --- Brand ------------------------------------------------------------ */
+  --sl-color-brand:        #FFD503; /* signature Sunlight yellow */
+  --sl-color-brand-hover:  #F0C800; /* deeper yellow for :hover */
+  --sl-color-brand-active: #E0BB00; /* pressed */
+  --sl-color-brand-soft:   #FFF3B8; /* tinted yellow surface */
+  --sl-color-brand-subtle: #FFFBEB; /* faint yellow wash */
+  --sl-color-plum:         #540F28; /* official logo color — deep plum */
+  --sl-color-plum-hover:   #6B1434; /* plum lifted for hover */
+
+  /* --- Ink / text ------------------------------------------------------- */
+  --sl-color-ink:          #0C0A08; /* primary text, near-black */
+  --sl-color-ink-strong:   #000000; /* pure-black accents */
+  --sl-color-text-muted:   #435366; /* slate body / paragraph */
+  --sl-color-text-subtle:  #79797E; /* tertiary / captions */
+  --sl-color-text-on-brand:#0C0A08; /* text on yellow */
+  --sl-color-text-on-dark: #DBDAC9; /* warm cream text on dark */
+  --sl-color-text-inverse: #FFFFFF; /* white text */
+
+  /* --- Surfaces --------------------------------------------------------- */
+  --sl-color-bg:           #FFFFFF; /* page / card base */
+  --sl-color-surface:      #FAFAFA; /* raised section bg */
+  --sl-color-surface-sand: #F4F2F0; /* warm off-white section bg */
+  --sl-color-surface-warm: #FAFAF8; /* subtle warm tint */
+  --sl-color-surface-cool: #F5F5F7; /* cool gray tint */
+  --sl-color-surface-dark: #2E2E2E; /* dark footer / hero panels */
+
+  /* --- Lines & states --------------------------------------------------- */
+  --sl-color-border:        #E9E8E7; /* hairline borders / inputs */
+  --sl-color-border-strong: #D6D3D1; /* stronger divider */
+  --sl-color-ring:          #A8A29E; /* focus ring base */
+  --sl-color-success:       #4F9D69; /* green (charts / checks) */
+  --sl-color-danger:        #DC4C3E;
+  --sl-color-info:          #3B82F6;
+
+  /* --- Semantic aliases (prefer these in product code) ------------------ */
+  --sl-bg-page:        var(--sl-color-bg);
+  --sl-bg-section:     var(--sl-color-surface-sand);
+  --sl-bg-section-warm:var(--sl-color-surface-warm);
+  --sl-bg-panel-dark:  var(--sl-color-surface-dark);
+  --sl-surface-card:   var(--sl-color-bg);
+
+  --sl-text-heading:   var(--sl-color-ink);
+  --sl-text-body:      var(--sl-color-text-muted);
+  --sl-text-caption:   var(--sl-color-text-subtle);
+
+  --sl-accent:         var(--sl-color-brand);
+  --sl-accent-pressed: var(--sl-color-brand-active);
+  --sl-on-accent:      var(--sl-color-text-on-brand);
+
+  --sl-border-hairline:var(--sl-color-border);
+  --sl-focus-ring:     rgba(255, 213, 3, 0.45);
+}

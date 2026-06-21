@@ -1,4 +1,17 @@
-# Sunlight Design System
+# Sunlight Studio — Writing Machine (Prototype)
+
+This repo hosts the **Sunlight Studio writing-machine prototype** plus the reusable **Sunlight Design System** it's built on.
+
+## Prototype
+
+`index.html` at the repo root is the deployable entry point. It's a self-contained React prototype (React + Babel loaded from a CDN, compiled in-browser) that bundles its own copy of the design system under `_ds/` and its app code under `app/`.
+
+- **View locally:** serve the folder over HTTP, e.g. `python3 -m http.server`, then open `http://localhost:8000/`. (Opening `index.html` directly via `file://` won't work — the browser blocks the module/script loads.)
+- **Deploy on GitHub Pages:** enable Pages for the `main` branch (root). A `.nojekyll` file is committed so Pages serves the `_ds/` directory — without it, Jekyll would ignore any path beginning with `_` and the prototype would load unstyled/broken.
+
+---
+
+## Sunlight Design System
 
 A reusable design system extracted from [sunlightapi.com](https://www.sunlightapi.com/) — everything you need to build new apps that look and feel like Sunlight.
 

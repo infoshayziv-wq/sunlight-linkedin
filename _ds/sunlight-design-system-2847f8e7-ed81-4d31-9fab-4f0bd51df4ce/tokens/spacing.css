@@ -1,0 +1,23 @@
+/* ==========================================================================
+   Sunlight — Spacing tokens (4px base scale)
+   ========================================================================== */
+:root {
+  --sl-space-0:  0;
+  --sl-space-1:  4px;
+  --sl-space-2:  8px;
+  --sl-space-3:  12px;
+  --sl-space-4:  16px;
+  --sl-space-5:  20px;
+  --sl-space-6:  24px;
+  --sl-space-8:  32px;
+  --sl-space-10: 40px;
+  --sl-space-12: 48px;
+  --sl-space-16: 64px;
+  --sl-space-20: 80px;
+  --sl-space-24: 96px;
+  --sl-space-32: 128px;
+
+  /* Section rhythm used across the marketing site */
+  --sl-section-y: var(--sl-space-24); /* vertical padding between sections */
+  --sl-gutter:    var(--sl-space-6);  /* container side padding */
+}

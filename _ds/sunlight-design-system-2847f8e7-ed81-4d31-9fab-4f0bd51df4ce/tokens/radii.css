@@ -1,0 +1,13 @@
+/* ==========================================================================
+   Sunlight — Radii tokens
+   Rounded cards (8–16px), pill nav/badges (9999px).
+   ========================================================================== */
+:root {
+  --sl-radius-sm:   6px;
+  --sl-radius-md:   8px;    /* default buttons */
+  --sl-radius-lg:   12px;   /* icon chips */
+  --sl-radius-xl:   16px;   /* cards */
+  --sl-radius-2xl:  24px;   /* large panels */
+  --sl-radius-3xl:  32px;   /* hero containers */
+  --sl-radius-pill: 9999px; /* nav buttons / badges */
+}

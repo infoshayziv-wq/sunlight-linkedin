@@ -1,0 +1,14 @@
+/* ==========================================================================
+   Sunlight — Motion & layout tokens
+   Calm, functional motion: fast fades and small lifts, no bounce.
+   ========================================================================== */
+:root {
+  --sl-ease:         cubic-bezier(0.4, 0, 0.2, 1);   /* @kind other */
+  --sl-ease-out:     cubic-bezier(0.16, 1, 0.3, 1);  /* @kind other */
+  --sl-duration-fast: 150ms;                         /* @kind other */
+  --sl-duration:      250ms;                         /* @kind other */
+  --sl-duration-slow: 400ms;                         /* @kind other */
+
+  --sl-container:        1200px;
+  --sl-container-narrow: 760px;
+}

@@ -1,0 +1,14 @@
+/* ==========================================================================
+   Sunlight Design System — Global entry point
+   Consumers link this one file. It is a manifest of @import lines only:
+   every token concern + the webfont declarations. Keep it that way — add
+   new token files here, never inline rules.
+   ========================================================================== */
+@import "tokens/fonts.css";
+@import "tokens/colors.css";
+@import "tokens/typography.css";
+@import "tokens/spacing.css";
+@import "tokens/radii.css";
+@import "tokens/shadows.css";
+@import "tokens/motion.css";
+@import "components/components.css";

@@ -1,0 +1,45 @@
+/* ==========================================================================
+   Sunlight — Typography tokens
+   Figtree everywhere. Headings: medium/semibold with tightened tracking.
+   Body: regular slate. Numerics/code: JetBrains Mono.
+   ========================================================================== */
+:root {
+  /* --- Families --------------------------------------------------------- */
+  --sl-font-sans: "Figtree", -apple-system, system-ui, "Segoe UI", Roboto,
+                  Oxygen, Ubuntu, sans-serif;
+  --sl-font-mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo,
+                  Consolas, monospace;
+
+  /* --- Size scale (px) — matches live site ------------------------------ */
+  --sl-text-xs:   12px;
+  --sl-text-sm:   14px;
+  --sl-text-base: 16px;
+  --sl-text-lg:   20px;  /* lead paragraph */
+  --sl-text-xl:   24px;  /* h3 / subhead */
+  --sl-text-2xl:  30px;
+  --sl-text-3xl:  36px;  /* h2 */
+  --sl-text-4xl:  48px;
+  --sl-text-5xl:  60px;  /* h1 / display */
+
+  /* --- Line heights ----------------------------------------------------- */
+  --sl-leading-tight:   1.0;  /* display headings */
+  --sl-leading-snug:    1.1;
+  --sl-leading-normal:  1.4;  /* sub-heads */
+  --sl-leading-relaxed: 1.5;  /* body */
+
+  /* --- Letter spacing — headings are tightened -------------------------- */
+  --sl-tracking-tighter: -1.5px;
+  --sl-tracking-tight:   -0.9px;
+  --sl-tracking-normal:  0;
+
+  /* --- Weights ---------------------------------------------------------- */
+  --sl-weight-regular:  400;
+  --sl-weight-medium:   500;
+  --sl-weight-semibold: 600;
+  --sl-weight-bold:     700;
+
+  /* --- Semantic roles --------------------------------------------------- */
+  --sl-display-weight: var(--sl-weight-medium);   /* h1 is medium, tightened */
+  --sl-heading-weight: var(--sl-weight-semibold); /* h2/h3 */
+  --sl-body-weight:    var(--sl-weight-regular);
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sunlight Studio — Writing Machine</title>
+
+<!-- Sunlight Design System tokens + components -->
+<link rel="stylesheet" href="_ds/sunlight-design-system-2847f8e7-ed81-4d31-9fab-4f0bd51df4ce/tokens/fonts.css" />
+<link rel="stylesheet" href="_ds/sunlight-design-system-2847f8e7-ed81-4d31-9fab-4f0bd51df4ce/tokens/colors.css" />
+<link rel="stylesheet" href="_ds/sunlight-design-system-2847f8e7-ed81-4d31-9fab-4f0bd51df4ce/tokens/typography.css" />
+<link rel="stylesheet" href="_ds/sunlight-design-system-2847f8e7-ed81-4d31-9fab-4f0bd51df4ce/tokens/spacing.css" />
+<link rel="stylesheet" href="_ds/sunlight-design-system-2847f8e7-ed81-4d31-9fab-4f0bd51df4ce/tokens/radii.css" />
+<link rel="stylesheet" href="_ds/sunlight-design-system-2847f8e7-ed81-4d31-9fab-4f0bd51df4ce/tokens/shadows.css" />
+<link rel="stylesheet" href="_ds/sunlight-design-system-2847f8e7-ed81-4d31-9fab-4f0bd51df4ce/tokens/motion.css" />
+<link rel="stylesheet" href="_ds/sunlight-design-system-2847f8e7-ed81-4d31-9fab-4f0bd51df4ce/components/components.css" />
+<link rel="stylesheet" href="_ds/sunlight-design-system-2847f8e7-ed81-4d31-9fab-4f0bd51df4ce/styles.css" />
+
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--sl-font-sans, Figtree, system-ui, sans-serif);
+    color: var(--sl-color-ink);
+    background: var(--sl-color-surface-warm);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  button, input, textarea { font-family: inherit; }
+  button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, [contenteditable]:focus-visible {
+    outline: none; box-shadow: 0 0 0 3px var(--sl-focus-ring);
+    border-radius: 6px;
+  }
+  ::selection { background: var(--sl-color-brand-soft); }
+  [contenteditable] { cursor: text; }
+
+  @keyframes swmBreathe {
+    0%, 100% { transform: scale(0.86); opacity: 0.65; }
+    50%      { transform: scale(1.0);  opacity: 1; }
+  }
+  .swm-breathe { animation: swmBreathe 1.8s var(--sl-ease, cubic-bezier(.4,0,.2,1)) infinite; }
+  @keyframes swmToastIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .swm-toast { animation: swmToastIn .25s cubic-bezier(.16,1,.3,1) both; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .swm-breathe, .swm-toast { animation: none; }
+  }
+
+  /* slimmer textareas/inputs to match calm aesthetic */
+  textarea.sl-input { line-height: 1.5; }
+</style>
+
+<!-- React + Babel (pinned) -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<!-- Sunlight DS React bundle (plain compiled JS) -->
+<script src="_ds/sunlight-design-system-2847f8e7-ed81-4d31-9fab-4f0bd51df4ce/_ds_bundle.js"></script>
+
+<!-- App: plain JS first (data, icons, store + core components) -->
+<script src="app/data.js"></script>
+<script src="app/icons.js"></script>
+<script src="app/ui-core.js"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<!-- App: JSX (run after normal scripts; order matters) -->
+<script type="text/babel" src="app/ui-bits.jsx"></script>
+<script type="text/babel" src="app/generate.jsx"></script>
+<script type="text/babel" src="app/editor.jsx"></script>
+<script type="text/babel" src="app/coordination.jsx"></script>
+<script type="text/babel" src="app/home.jsx"></script>
+<script type="text/babel" src="app/app.jsx"></script>
+
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" fill="#FFD503"/>
+    <text x="50" y="64" font-family="Figtree, sans-serif" font-size="48" font-weight="700" fill="#0C0A08" text-anchor="middle">S</text>
+  </svg>
+</template>
+</body>
+</html>
