@@ -1,0 +1,138 @@
+/* ==========================================================================
+   Sunlight Design System — Design Tokens (CSS Custom Properties)
+   Extracted from https://www.sunlightapi.com/
+   Framework-agnostic. Import this file once at the root of any app.
+   ========================================================================== */
+
+:root {
+  /* ---------------------------------------------------------------------
+     COLOR — Brand
+     --------------------------------------------------------------------- */
+  --sl-color-brand:            #FFD503; /* signature Sunlight yellow */
+  --sl-color-brand-hover:      #F0C800; /* slightly deeper for :hover */
+  --sl-color-brand-active:     #E0BB00; /* pressed state */
+  --sl-color-brand-soft:       #FFF3B8; /* tinted yellow surface */
+  --sl-color-brand-subtle:     #FFFBEB; /* faint yellow wash */
+  --sl-color-plum:             #540F28; /* official logo color (deep plum) */
+  --sl-color-plum-hover:       #6B1434; /* logo color, lifted for hover */
+
+  /* ---------------------------------------------------------------------
+     COLOR — Ink / text
+     --------------------------------------------------------------------- */
+  --sl-color-ink:              #0C0A08; /* primary text, near-black */
+  --sl-color-ink-strong:       #000000; /* pure black accents */
+  --sl-color-text-muted:       #435366; /* slate body / paragraph text */
+  --sl-color-text-subtle:      #79797E; /* tertiary / captions */
+  --sl-color-text-on-brand:    #0C0A08; /* text sitting on yellow */
+  --sl-color-text-on-dark:     #DBDAC9; /* warm cream text on dark bg */
+  --sl-color-text-inverse:     #FFFFFF; /* white text */
+
+  /* ---------------------------------------------------------------------
+     COLOR — Surfaces / backgrounds
+     --------------------------------------------------------------------- */
+  --sl-color-bg:               #FFFFFF; /* page / card base */
+  --sl-color-surface:          #FAFAFA; /* raised section bg */
+  --sl-color-surface-sand:     #F4F2F0; /* warm off-white section bg */
+  --sl-color-surface-warm:     #FAFAF8; /* subtle warm tint */
+  --sl-color-surface-cool:     #F5F5F7; /* cool gray tint */
+  --sl-color-surface-dark:     #2E2E2E; /* dark footer / hero panels */
+
+  /* ---------------------------------------------------------------------
+     COLOR — Lines & states
+     --------------------------------------------------------------------- */
+  --sl-color-border:           #E9E8E7; /* hairline borders / inputs */
+  --sl-color-border-strong:    #D6D3D1; /* stronger divider */
+  --sl-color-ring:             #A8A29E; /* focus ring base */
+  --sl-color-success:          #4F9D69; /* green accent (charts/checks) */
+  --sl-color-danger:           #DC4C3E;
+  --sl-color-info:             #3B82F6;
+
+  /* ---------------------------------------------------------------------
+     TYPOGRAPHY
+     --------------------------------------------------------------------- */
+  --sl-font-sans: "Figtree", -apple-system, system-ui, "Segoe UI", Roboto,
+                  Oxygen, Ubuntu, sans-serif;
+  --sl-font-mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo,
+                  Consolas, monospace;
+
+  /* Type scale (px) — matches live site */
+  --sl-text-xs:   12px;
+  --sl-text-sm:   14px;
+  --sl-text-base: 16px;
+  --sl-text-lg:   20px;  /* lead paragraph */
+  --sl-text-xl:   24px;
+  --sl-text-2xl:  30px;
+  --sl-text-3xl:  36px;  /* h2 / h3 */
+  --sl-text-4xl:  48px;
+  --sl-text-5xl:  60px;  /* h1 */
+
+  /* Line heights */
+  --sl-leading-tight:   1.0;   /* display headings */
+  --sl-leading-snug:    1.1;
+  --sl-leading-normal:  1.4;   /* sub-heads */
+  --sl-leading-relaxed: 1.5;   /* body */
+
+  /* Letter spacing — headings are tightened on the site */
+  --sl-tracking-tight:  -0.9px;
+  --sl-tracking-tighter:-1.5px;
+  --sl-tracking-normal: 0;
+
+  /* Font weights */
+  --sl-weight-regular:  400;
+  --sl-weight-medium:   500;
+  --sl-weight-semibold: 600;
+  --sl-weight-bold:     700;
+
+  /* ---------------------------------------------------------------------
+     SPACING (4px base scale)
+     --------------------------------------------------------------------- */
+  --sl-space-0:  0;
+  --sl-space-1:  4px;
+  --sl-space-2:  8px;
+  --sl-space-3:  12px;
+  --sl-space-4:  16px;
+  --sl-space-5:  20px;
+  --sl-space-6:  24px;
+  --sl-space-8:  32px;
+  --sl-space-10: 40px;
+  --sl-space-12: 48px;
+  --sl-space-16: 64px;
+  --sl-space-20: 80px;
+  --sl-space-24: 96px;
+  --sl-space-32: 128px;
+
+  /* ---------------------------------------------------------------------
+     RADII
+     --------------------------------------------------------------------- */
+  --sl-radius-sm:   6px;
+  --sl-radius-md:   8px;   /* default buttons */
+  --sl-radius-lg:   12px;  /* icon chips */
+  --sl-radius-xl:   16px;  /* cards */
+  --sl-radius-2xl:  24px;  /* large panels */
+  --sl-radius-3xl:  32px;  /* hero containers */
+  --sl-radius-pill: 9999px;/* nav buttons / badges */
+
+  /* ---------------------------------------------------------------------
+     SHADOWS
+     --------------------------------------------------------------------- */
+  --sl-shadow-xs: 0 1px 2px rgba(12, 10, 8, 0.05);
+  --sl-shadow-sm: 0 1px 3px rgba(12, 10, 8, 0.08), 0 1px 2px rgba(12, 10, 8, 0.04);
+  --sl-shadow-md: 0 4px 12px rgba(12, 10, 8, 0.08);
+  --sl-shadow-lg: 0 12px 32px rgba(12, 10, 8, 0.10);
+  --sl-shadow-brand: 0 8px 24px rgba(255, 213, 3, 0.35);
+
+  /* ---------------------------------------------------------------------
+     MOTION
+     --------------------------------------------------------------------- */
+  --sl-ease:        cubic-bezier(0.4, 0, 0.2, 1);
+  --sl-ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --sl-duration-fast: 150ms;
+  --sl-duration:      250ms;
+  --sl-duration-slow: 400ms;
+
+  /* ---------------------------------------------------------------------
+     LAYOUT
+     --------------------------------------------------------------------- */
+  --sl-container:     1200px;
+  --sl-container-narrow: 760px;
+}

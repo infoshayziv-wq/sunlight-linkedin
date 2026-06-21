@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sunlight — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<!-- Self-contained: tokens + component styles inlined so this file opens standalone -->
+<style>
+:root{
+  --sl-color-brand:#FFD503;--sl-color-brand-hover:#F0C800;--sl-color-brand-active:#E0BB00;
+  --sl-color-brand-soft:#FFF3B8;--sl-color-brand-subtle:#FFFBEB;--sl-color-plum:#540F28;--sl-color-plum-hover:#6B1434;
+  --sl-color-ink:#0C0A08;--sl-color-ink-strong:#000;--sl-color-text-muted:#435366;
+  --sl-color-text-subtle:#79797E;--sl-color-text-on-brand:#0C0A08;--sl-color-text-on-dark:#DBDAC9;--sl-color-text-inverse:#fff;
+  --sl-color-bg:#fff;--sl-color-surface:#FAFAFA;--sl-color-surface-sand:#F4F2F0;--sl-color-surface-warm:#FAFAF8;
+  --sl-color-surface-cool:#F5F5F7;--sl-color-surface-dark:#2E2E2E;
+  --sl-color-border:#E9E8E7;--sl-color-border-strong:#D6D3D1;--sl-color-ring:#A8A29E;--sl-color-success:#4F9D69;
+  --sl-font-sans:"Figtree",-apple-system,system-ui,"Segoe UI",Roboto,sans-serif;
+  --sl-text-xs:12px;--sl-text-sm:14px;--sl-text-base:16px;--sl-text-lg:20px;--sl-text-xl:24px;
+  --sl-text-2xl:30px;--sl-text-3xl:36px;--sl-text-4xl:48px;--sl-text-5xl:60px;
+  --sl-leading-tight:1;--sl-leading-snug:1.1;--sl-leading-normal:1.4;--sl-leading-relaxed:1.5;
+  --sl-tracking-tight:-0.9px;--sl-tracking-tighter:-1.5px;
+  --sl-weight-regular:400;--sl-weight-medium:500;--sl-weight-semibold:600;--sl-weight-bold:700;
+  --sl-radius-sm:6px;--sl-radius-md:8px;--sl-radius-lg:12px;--sl-radius-xl:16px;--sl-radius-2xl:24px;--sl-radius-3xl:32px;--sl-radius-pill:9999px;
+  --sl-shadow-xs:0 1px 2px rgba(12,10,8,.05);--sl-shadow-sm:0 1px 3px rgba(12,10,8,.08),0 1px 2px rgba(12,10,8,.04);
+  --sl-shadow-md:0 4px 12px rgba(12,10,8,.08);--sl-shadow-lg:0 12px 32px rgba(12,10,8,.10);--sl-shadow-brand:0 8px 24px rgba(255,213,3,.35);
+  --sl-ease:cubic-bezier(.4,0,.2,1);--sl-duration-fast:150ms;--sl-duration:250ms;--sl-container:1100px;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--sl-font-sans);color:var(--sl-color-ink);background:var(--sl-color-surface-warm);-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--sl-container);margin:0 auto;padding:0 24px}
+header.hero{background:var(--sl-color-surface-sand);padding:72px 0 56px;border-bottom:1px solid var(--sl-color-border)}
+.logo{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:22px;color:var(--sl-color-plum)}
+.logo .mk{display:inline-flex;align-items:center;justify-content:center;color:inherit}
+.logo .mk svg{display:block}
+h1.title{font-size:var(--sl-text-5xl);font-weight:500;line-height:1;letter-spacing:var(--sl-tracking-tighter);margin:28px 0 12px}
+.subtitle{font-size:var(--sl-text-lg);color:var(--sl-color-text-muted);max-width:620px;margin:0}
+section.block{padding:56px 0;border-bottom:1px solid var(--sl-color-border)}
+.eyebrow{display:inline-block;padding:6px 14px;border-radius:var(--sl-radius-pill);background:var(--sl-color-surface-cool);font-size:13px;font-weight:600;color:var(--sl-color-text-subtle);letter-spacing:.02em}
+h2.sec{font-size:var(--sl-text-3xl);font-weight:600;letter-spacing:var(--sl-tracking-tight);margin:16px 0 4px}
+.sec-note{color:var(--sl-color-text-subtle);font-size:15px;margin:0 0 28px}
+.grid{display:grid;gap:16px}
+/* swatches */
+.swatches{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+.swatch{border:1px solid var(--sl-color-border);border-radius:var(--sl-radius-lg);overflow:hidden;background:#fff}
+.swatch .chip{height:84px}
+.swatch .meta{padding:10px 12px}
+.swatch .nm{font-size:13px;font-weight:600}
+.swatch .hex{font-size:12px;color:var(--sl-color-text-subtle);font-variant-numeric:tabular-nums;text-transform:uppercase}
+/* type scale */
+.type-row{display:flex;align-items:baseline;gap:20px;padding:14px 0;border-bottom:1px dashed var(--sl-color-border)}
+.type-row .lbl{width:120px;flex:0 0 120px;font-size:12px;color:var(--sl-color-text-subtle);font-variant-numeric:tabular-nums}
+.btnrow{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+/* component css (subset of components.css) */
+.sl-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--sl-font-sans);font-size:16px;font-weight:500;line-height:1;padding:12px 24px;border:1px solid transparent;cursor:pointer;border-radius:var(--sl-radius-md);transition:all var(--sl-duration-fast) var(--sl-ease)}
+.sl-btn:active{transform:translateY(1px)}
+.sl-btn--primary{background:var(--sl-color-brand);color:var(--sl-color-text-on-brand)}
+.sl-btn--primary:hover{background:var(--sl-color-brand-hover)}
+.sl-btn--secondary{background:var(--sl-color-ink);color:#fff}
+.sl-btn--secondary:hover{background:#1f1c19}
+.sl-btn--outline{background:transparent;color:var(--sl-color-ink);border-color:var(--sl-color-border-strong)}
+.sl-btn--outline:hover{background:var(--sl-color-surface-sand)}
+.sl-btn--ghost{background:transparent;color:var(--sl-color-ink)}
+.sl-btn--ghost:hover{background:var(--sl-color-surface-sand)}
+.sl-btn--pill{border-radius:var(--sl-radius-pill)}
+.sl-btn--sm{padding:8px 16px;font-size:14px}
+.sl-btn--lg{padding:16px 32px;font-size:20px}
+.sl-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:var(--sl-radius-pill);font-size:14px;font-weight:500;background:var(--sl-color-surface-sand);color:var(--sl-color-ink)}
+.sl-badge--brand{background:var(--sl-color-brand)}
+.sl-badge--soft{background:var(--sl-color-brand-soft)}
+.sl-badge--outline{background:transparent;border:1px solid var(--sl-color-border);color:var(--sl-color-text-muted)}
+.sl-badge--success{background:rgba(79,157,105,.12);color:var(--sl-color-success)}
+.sl-card{background:#fff;border:1px solid var(--sl-color-border);border-radius:var(--sl-radius-xl);padding:24px;box-shadow:var(--sl-shadow-sm);transition:all var(--sl-duration) var(--sl-ease)}
+.sl-card--hover:hover{box-shadow:var(--sl-shadow-lg);transform:translateY(-2px)}
+.sl-card--sand{background:var(--sl-color-surface-sand);border-color:transparent;box-shadow:none}
+.sl-card--dark{background:var(--sl-color-surface-dark);border-color:transparent;color:var(--sl-color-text-on-dark)}
+.iconchip{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:var(--sl-radius-lg);background:var(--sl-color-surface-sand);color:var(--sl-color-ink)}
+.iconchip--brand{background:var(--sl-color-brand)}
+.field{display:flex;flex-direction:column;gap:6px;max-width:340px}
+.lab{font-size:14px;font-weight:500}
+.inp{font-family:var(--sl-font-sans);font-size:16px;padding:12px 14px;border:1px solid var(--sl-color-border);border-radius:var(--sl-radius-md)}
+.inp:focus{outline:none;border-color:var(--sl-color-brand);box-shadow:0 0 0 3px rgba(255,213,3,.35)}
+.check{display:flex;align-items:center;gap:10px;color:var(--sl-color-text-muted);padding:6px 0}
+.check .mk{width:20px;height:20px;border-radius:50%;background:var(--sl-color-ink);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px}
+.cards3{grid-template-columns:repeat(3,1fr)}
+.radii{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
+.rbox{height:72px;background:var(--sl-color-brand-soft);border:1px solid var(--sl-color-brand);display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;font-size:12px;color:var(--sl-color-text-muted)}
+.shadowbox{height:90px;background:#fff;border-radius:var(--sl-radius-lg);display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;font-size:12px;color:var(--sl-color-text-subtle)}
+.navbar{display:flex;align-items:center;justify-content:space-between;background:#fff;border-radius:var(--sl-radius-pill);box-shadow:var(--sl-shadow-md);padding:12px 16px 12px 24px}
+.nav-links{display:flex;align-items:center;gap:26px}
+.nav-links a{color:var(--sl-color-ink);text-decoration:none;font-weight:500}
+.spacing-row{display:flex;align-items:center;gap:16px;padding:6px 0}
+.spacing-bar{height:16px;background:var(--sl-color-brand);border-radius:3px}
+@media(max-width:760px){.cards3{grid-template-columns:1fr}h1.title{font-size:44px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="logo"><span class="mk">
+      <svg width="30" height="27" viewBox="0 0 46 42" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M13.9707 0V20.9558C6.2431 20.9044 0.000148773 16.2336 0.000148773 10.4781C0.000148773 4.72264 6.2431 0.0514331 13.9707 0Z"/><path d="M31.2676 0V20.9558C23.54 20.9044 17.297 16.2336 17.297 10.4781C17.297 4.72264 23.54 0.0514331 31.2676 0Z"/><path d="M31.2671 20.9558V41.9116C38.9947 41.8602 45.2376 37.1894 45.2376 31.4339C45.2376 25.6784 38.9947 21.0072 31.2671 20.9558Z"/><path d="M13.9702 20.9558V41.9116C21.6978 41.8602 27.9408 37.1894 27.9408 31.4339C27.9408 25.6784 21.6978 21.0072 13.9702 20.9558Z"/></svg>
+    </span>Sunlight</div>
+    <h1 class="title">Design System</h1>
+    <p class="subtitle">The visual language behind Sunlight — colors, typography, and components extracted from sunlightapi.com, ready to build new apps on.</p>
+  </div>
+</header>
+
+<!-- LOGO -->
+<section class="block"><div class="wrap">
+  <span class="eyebrow">Brand</span>
+  <h2 class="sec">Logo</h2>
+  <p class="sec-note">The official Sunlight mark — four petals forming an "S", in brand plum <code>#540F28</code>. The mark uses <code>currentColor</code>, so it recolors cleanly on light or dark surfaces. Assets: <code>assets/logo-full.svg</code>, <code>assets/logo-mark.svg</code>.</p>
+  <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr));align-items:stretch">
+    <div class="sl-card" style="display:flex;align-items:center;justify-content:center;min-height:120px">
+      <div class="logo" style="font-size:24px"><span class="mk"><svg width="34" height="31" viewBox="0 0 46 42" fill="currentColor"><path d="M13.9707 0V20.9558C6.2431 20.9044 0.000148773 16.2336 0.000148773 10.4781C0.000148773 4.72264 6.2431 0.0514331 13.9707 0Z"/><path d="M31.2676 0V20.9558C23.54 20.9044 17.297 16.2336 17.297 10.4781C17.297 4.72264 23.54 0.0514331 31.2676 0Z"/><path d="M31.2671 20.9558V41.9116C38.9947 41.8602 45.2376 37.1894 45.2376 31.4339C45.2376 25.6784 38.9947 21.0072 31.2671 20.9558Z"/><path d="M13.9702 20.9558V41.9116C21.6978 41.8602 27.9408 37.1894 27.9408 31.4339C27.9408 25.6784 21.6978 21.0072 13.9702 20.9558Z"/></svg></span>Sunlight</div>
+    </div>
+    <div class="sl-card sl-card--sand" style="display:flex;align-items:center;justify-content:center;min-height:120px">
+      <span style="color:var(--sl-color-plum)"><svg width="48" height="44" viewBox="0 0 46 42" fill="currentColor"><path d="M13.9707 0V20.9558C6.2431 20.9044 0.000148773 16.2336 0.000148773 10.4781C0.000148773 4.72264 6.2431 0.0514331 13.9707 0Z"/><path d="M31.2676 0V20.9558C23.54 20.9044 17.297 16.2336 17.297 10.4781C17.297 4.72264 23.54 0.0514331 31.2676 0Z"/><path d="M31.2671 20.9558V41.9116C38.9947 41.8602 45.2376 37.1894 45.2376 31.4339C45.2376 25.6784 38.9947 21.0072 31.2671 20.9558Z"/><path d="M13.9702 20.9558V41.9116C21.6978 41.8602 27.9408 37.1894 27.9408 31.4339C27.9408 25.6784 21.6978 21.0072 13.9702 20.9558Z"/></svg></span>
+    </div>
+    <div class="sl-card sl-card--dark" style="display:flex;align-items:center;justify-content:center;min-height:120px">
+      <div class="logo" style="font-size:24px;color:#fff"><span class="mk"><svg width="34" height="31" viewBox="0 0 46 42" fill="currentColor"><path d="M13.9707 0V20.9558C6.2431 20.9044 0.000148773 16.2336 0.000148773 10.4781C0.000148773 4.72264 6.2431 0.0514331 13.9707 0Z"/><path d="M31.2676 0V20.9558C23.54 20.9044 17.297 16.2336 17.297 10.4781C17.297 4.72264 23.54 0.0514331 31.2676 0Z"/><path d="M31.2671 20.9558V41.9116C38.9947 41.8602 45.2376 37.1894 45.2376 31.4339C45.2376 25.6784 38.9947 21.0072 31.2671 20.9558Z"/><path d="M13.9702 20.9558V41.9116C21.6978 41.8602 27.9408 37.1894 27.9408 31.4339C27.9408 25.6784 21.6978 21.0072 13.9702 20.9558Z"/></svg></span>Sunlight</div>
+    </div>
+    <div class="sl-card" style="display:flex;align-items:center;justify-content:center;min-height:120px;background:var(--sl-color-brand)">
+      <span style="color:var(--sl-color-plum)"><svg width="48" height="44" viewBox="0 0 46 42" fill="currentColor"><path d="M13.9707 0V20.9558C6.2431 20.9044 0.000148773 16.2336 0.000148773 10.4781C0.000148773 4.72264 6.2431 0.0514331 13.9707 0Z"/><path d="M31.2676 0V20.9558C23.54 20.9044 17.297 16.2336 17.297 10.4781C17.297 4.72264 23.54 0.0514331 31.2676 0Z"/><path d="M31.2671 20.9558V41.9116C38.9947 41.8602 45.2376 37.1894 45.2376 31.4339C45.2376 25.6784 38.9947 21.0072 31.2671 20.9558Z"/><path d="M13.9702 20.9558V41.9116C21.6978 41.8602 27.9408 37.1894 27.9408 31.4339C27.9408 25.6784 21.6978 21.0072 13.9702 20.9558Z"/></svg></span>
+    </div>
+  </div>
+</div></section>
+
+<!-- COLORS -->
+<section class="block"><div class="wrap">
+  <span class="eyebrow">Foundations</span>
+  <h2 class="sec">Color</h2>
+  <p class="sec-note">Signature yellow leads. Near-black ink for text, warm off-whites for surfaces, a slate for body copy, and a dark panel for footers.</p>
+  <div class="grid swatches" id="swatches"></div>
+</div></section>
+
+<!-- TYPOGRAPHY -->
+<section class="block"><div class="wrap">
+  <span class="eyebrow">Foundations</span>
+  <h2 class="sec">Typography</h2>
+  <p class="sec-note">Figtree across the board. Headings are medium/semibold with tightened tracking; body copy uses a comfortable slate.</p>
+  <div id="typescale"></div>
+</div></section>
+
+<!-- BUTTONS -->
+<section class="block"><div class="wrap">
+  <span class="eyebrow">Components</span>
+  <h2 class="sec">Buttons</h2>
+  <p class="sec-note">Yellow primary is the brand's signature CTA. Pill shape for nav, rounded for in-page actions.</p>
+  <div class="btnrow" style="margin-bottom:18px">
+    <button class="sl-btn sl-btn--primary">Get Started Now</button>
+    <button class="sl-btn sl-btn--primary sl-btn--pill">Contact Sales</button>
+    <button class="sl-btn sl-btn--secondary">Learn More</button>
+    <button class="sl-btn sl-btn--outline">Documentation</button>
+    <button class="sl-btn sl-btn--ghost">Skip</button>
+  </div>
+  <div class="btnrow">
+    <button class="sl-btn sl-btn--primary sl-btn--sm">Small</button>
+    <button class="sl-btn sl-btn--primary">Medium</button>
+    <button class="sl-btn sl-btn--primary sl-btn--lg">Large</button>
+  </div>
+</div></section>
+
+<!-- BADGES -->
+<section class="block"><div class="wrap">
+  <span class="eyebrow">Components</span>
+  <h2 class="sec">Badges &amp; Eyebrows</h2>
+  <p class="sec-note">Pill labels used as section eyebrows ("Our Products", "Why Sunlight") and status chips.</p>
+  <div class="btnrow">
+    <span class="sl-badge">Our Products</span>
+    <span class="sl-badge sl-badge--brand">New</span>
+    <span class="sl-badge sl-badge--soft">Beta</span>
+    <span class="sl-badge sl-badge--outline">Developers ↗</span>
+    <span class="sl-badge sl-badge--success">● Live</span>
+  </div>
+</div></section>
+
+<!-- CARDS -->
+<section class="block"><div class="wrap">
+  <span class="eyebrow">Components</span>
+  <h2 class="sec">Cards</h2>
+  <p class="sec-note">Feature cards with icon chips, mirroring the "Why Sunlight" grid.</p>
+  <div class="grid cards3">
+    <div class="sl-card sl-card--hover">
+      <span class="iconchip" style="margin-bottom:14px">🤖</span>
+      <h3 style="margin:0 0 8px;font-size:20px;font-weight:600">AI-Driven Automation</h3>
+      <p style="margin:0;color:var(--sl-color-text-muted)">Agents execute card payments across any supplier portal, at scale.</p>
+    </div>
+    <div class="sl-card sl-card--sand">
+      <span class="iconchip iconchip--brand" style="margin-bottom:14px">⚡</span>
+      <h3 style="margin:0 0 8px;font-size:20px;font-weight:600">Zero Supplier Onboarding</h3>
+      <p style="margin:0;color:var(--sl-color-text-muted)">No change to how buyers or suppliers operate. No onboarding required.</p>
+    </div>
+    <div class="sl-card sl-card--dark">
+      <span class="iconchip iconchip--brand" style="margin-bottom:14px">🌐</span>
+      <h3 style="margin:0 0 8px;font-size:20px;font-weight:600;color:#fff">Universal Portal Integration</h3>
+      <p style="margin:0;color:var(--sl-color-text-on-dark)">Connect to any payment portal with full audit and compliance.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- FORMS + CHECKLIST -->
+<section class="block"><div class="wrap">
+  <span class="eyebrow">Components</span>
+  <h2 class="sec">Forms &amp; Lists</h2>
+  <div class="grid" style="grid-template-columns:1fr 1fr;gap:48px;align-items:start">
+    <div>
+      <div class="field" style="margin-bottom:16px">
+        <label class="lab">Work email</label>
+        <input class="inp" placeholder="you@company.com" />
+      </div>
+      <div class="field">
+        <label class="lab">Company</label>
+        <input class="inp" placeholder="Acme Inc." />
+      </div>
+    </div>
+    <div>
+      <div class="check"><span class="mk">✓</span>Unlock card-eligible invoices at scale</div>
+      <div class="check"><span class="mk">✓</span>Automate B2B card payments end-to-end</div>
+      <div class="check"><span class="mk">✓</span>Maximize share of wallet</div>
+      <div class="check"><span class="mk">✓</span>Grow interchange revenue</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- NAVBAR -->
+<section class="block"><div class="wrap">
+  <span class="eyebrow">Patterns</span>
+  <h2 class="sec">Floating Navbar</h2>
+  <p class="sec-note">The signature rounded, shadowed header pill.</p>
+  <div class="navbar">
+    <div class="logo" style="font-size:18px"><span class="mk">
+      <svg width="26" height="24" viewBox="0 0 46 42" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M13.9707 0V20.9558C6.2431 20.9044 0.000148773 16.2336 0.000148773 10.4781C0.000148773 4.72264 6.2431 0.0514331 13.9707 0Z"/><path d="M31.2676 0V20.9558C23.54 20.9044 17.297 16.2336 17.297 10.4781C17.297 4.72264 23.54 0.0514331 31.2676 0Z"/><path d="M31.2671 20.9558V41.9116C38.9947 41.8602 45.2376 37.1894 45.2376 31.4339C45.2376 25.6784 38.9947 21.0072 31.2671 20.9558Z"/><path d="M13.9702 20.9558V41.9116C21.6978 41.8602 27.9408 37.1894 27.9408 31.4339C27.9408 25.6784 21.6978 21.0072 13.9702 20.9558Z"/></svg>
+    </span>Sunlight</div>
+    <div class="nav-links">
+      <a href="#">Products ▾</a>
+      <a href="#">Developers ↗</a>
+      <button class="sl-btn sl-btn--primary sl-btn--pill">Contact Sales</button>
+    </div>
+  </div>
+</div></section>
+
+<!-- RADII + SHADOWS + SPACING -->
+<section class="block"><div class="wrap">
+  <span class="eyebrow">Foundations</span>
+  <h2 class="sec">Radii, Shadows &amp; Spacing</h2>
+  <h3 style="font-size:16px;color:var(--sl-color-text-subtle);margin:24px 0 12px;font-weight:600">Border radius</h3>
+  <div class="grid radii" id="radii"></div>
+  <h3 style="font-size:16px;color:var(--sl-color-text-subtle);margin:32px 0 12px;font-weight:600">Elevation</h3>
+  <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr))" id="shadows"></div>
+  <h3 style="font-size:16px;color:var(--sl-color-text-subtle);margin:32px 0 12px;font-weight:600">Spacing scale (4px base)</h3>
+  <div id="spacing"></div>
+</div></section>
+
+<footer style="background:var(--sl-color-surface-dark);color:var(--sl-color-text-on-dark);padding:40px 0">
+  <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+    <div class="logo" style="color:#fff"><span class="mk">
+      <svg width="28" height="26" viewBox="0 0 46 42" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M13.9707 0V20.9558C6.2431 20.9044 0.000148773 16.2336 0.000148773 10.4781C0.000148773 4.72264 6.2431 0.0514331 13.9707 0Z"/><path d="M31.2676 0V20.9558C23.54 20.9044 17.297 16.2336 17.297 10.4781C17.297 4.72264 23.54 0.0514331 31.2676 0Z"/><path d="M31.2671 20.9558V41.9116C38.9947 41.8602 45.2376 37.1894 45.2376 31.4339C45.2376 25.6784 38.9947 21.0072 31.2671 20.9558Z"/><path d="M13.9702 20.9558V41.9116C21.6978 41.8602 27.9408 37.1894 27.9408 31.4339C27.9408 25.6784 21.6978 21.0072 13.9702 20.9558Z"/></svg>
+    </span>Sunlight</div>
+    <span style="font-size:14px;opacity:.8">Design system reference · derived from sunlightapi.com</span>
+  </div>
+</footer>
+
+<script>
+const colors = [
+  ["Brand","#FFD503"],["Brand Hover","#F0C800"],["Brand Soft","#FFF3B8"],["Brand Subtle","#FFFBEB"],
+  ["Plum (logo)","#540F28"],["Plum Hover","#6B1434"],
+  ["Ink","#0C0A08"],["Ink Strong","#000000"],["Text Muted","#435366"],["Text Subtle","#79797E"],
+  ["Text on Dark","#DBDAC9"],["Surface Sand","#F4F2F0"],["Surface Cool","#F5F5F7"],["Surface Raised","#FAFAFA"],
+  ["Surface Dark","#2E2E2E"],["Border","#E9E8E7"],["Ring","#A8A29E"],["Success","#4F9D69"]
+];
+document.getElementById("swatches").innerHTML = colors.map(([n,h])=>{
+  const dark = ["#0C0A08","#000000","#435366","#2E2E2E","#79797E","#4F9D69","#540F28","#6B1434"].includes(h);
+  return `<div class="swatch"><div class="chip" style="background:${h};${h==='#FFFBEB'||h==='#FAFAFA'?'border-bottom:1px solid #E9E8E7':''}"></div><div class="meta"><div class="nm">${n}</div><div class="hex">${h}</div></div></div>`;
+}).join("");
+
+const types = [
+  ["Display / H1","60px / 500","font-size:60px;font-weight:500;letter-spacing:-1.5px;line-height:1","Modern finance ops"],
+  ["Heading / H2","36px / 600","font-size:36px;font-weight:600;letter-spacing:-.9px;line-height:1.1","More Card Revenue."],
+  ["Subhead / H3","24px / 600","font-size:24px;font-weight:600","Agentic Portal Payments"],
+  ["Lead","20px / 400","font-size:20px;font-weight:400;color:#435366;line-height:1.5","Unlocks a new revenue stream for AP platforms."],
+  ["Body","16px / 400","font-size:16px;font-weight:400;color:#435366","Execute card payments across any supplier portal."],
+  ["Caption","14px / 400","font-size:14px;color:#79797E","Full audit and compliance."]
+];
+document.getElementById("typescale").innerHTML = types.map(([n,s,css,ex])=>
+  `<div class="type-row"><div class="lbl">${n}<br>${s}</div><div style="${css}">${ex}</div></div>`).join("");
+
+const radii=[["sm","6px"],["md","8px"],["lg","12px"],["xl","16px"],["2xl","24px"],["3xl","32px"],["pill","9999px"]];
+document.getElementById("radii").innerHTML = radii.map(([n,v])=>
+  `<div class="rbox" style="border-radius:${v==='9999px'?'9999px':v}">${n} · ${v}</div>`).join("");
+
+const shadows=[["xs","var(--sl-shadow-xs)"],["sm","var(--sl-shadow-sm)"],["md","var(--sl-shadow-md)"],["lg","var(--sl-shadow-lg)"],["brand","var(--sl-shadow-brand)"]];
+document.getElementById("shadows").innerHTML = shadows.map(([n,v])=>
+  `<div class="shadowbox" style="box-shadow:${v}">${n}</div>`).join("");
+
+const space=[["1","4px"],["2","8px"],["3","12px"],["4","16px"],["6","24px"],["8","32px"],["12","48px"],["16","64px"],["24","96px"]];
+document.getElementById("spacing").innerHTML = space.map(([n,v])=>
+  `<div class="spacing-row"><span style="width:60px;font-size:12px;color:#79797E">space-${n}</span><span class="spacing-bar" style="width:${v}"></span><span style="font-size:12px;color:#79797E">${v}</span></div>`).join("");
+</script>
+</body>
+</html>

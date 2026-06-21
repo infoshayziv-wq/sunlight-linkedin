@@ -1,0 +1,156 @@
+/* ==========================================================================
+   Sunlight Design System — Component Styles
+   Depends on tokens.css. Framework-neutral: works with the React components,
+   plain HTML, or any framework. All classes are prefixed `sl-`.
+   ========================================================================== */
+
+/* Base ------------------------------------------------------------------- */
+.sl-root,
+.sl-root * { box-sizing: border-box; }
+.sl-root {
+  font-family: var(--sl-font-sans);
+  color: var(--sl-color-ink);
+  background: var(--sl-color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography ------------------------------------------------------------- */
+.sl-h1 {
+  font-size: var(--sl-text-5xl); font-weight: var(--sl-weight-medium);
+  line-height: var(--sl-leading-tight); letter-spacing: var(--sl-tracking-tighter);
+  color: var(--sl-color-ink); margin: 0;
+}
+.sl-h2 {
+  font-size: var(--sl-text-3xl); font-weight: var(--sl-weight-semibold);
+  line-height: var(--sl-leading-snug); letter-spacing: var(--sl-tracking-tight);
+  color: var(--sl-color-ink); margin: 0;
+}
+.sl-h3 {
+  font-size: var(--sl-text-xl); font-weight: var(--sl-weight-semibold);
+  line-height: var(--sl-leading-snug); color: var(--sl-color-ink); margin: 0;
+}
+.sl-lead {
+  font-size: var(--sl-text-lg); font-weight: var(--sl-weight-regular);
+  line-height: var(--sl-leading-relaxed); color: var(--sl-color-text-muted); margin: 0;
+}
+.sl-body { font-size: var(--sl-text-base); line-height: var(--sl-leading-relaxed); color: var(--sl-color-text-muted); margin: 0; }
+.sl-eyebrow { font-size: var(--sl-text-sm); font-weight: var(--sl-weight-semibold); color: var(--sl-color-text-subtle); }
+.sl-caption { font-size: var(--sl-text-sm); color: var(--sl-color-text-subtle); }
+
+/* Button ----------------------------------------------------------------- */
+.sl-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--sl-font-sans); font-size: var(--sl-text-base);
+  font-weight: var(--sl-weight-medium); line-height: 1;
+  padding: 12px 24px; border: 1px solid transparent; cursor: pointer;
+  text-decoration: none; white-space: nowrap; user-select: none;
+  border-radius: var(--sl-radius-md);
+  transition: background var(--sl-duration-fast) var(--sl-ease),
+              color var(--sl-duration-fast) var(--sl-ease),
+              box-shadow var(--sl-duration-fast) var(--sl-ease),
+              transform var(--sl-duration-fast) var(--sl-ease);
+}
+.sl-btn:active { transform: translateY(1px); }
+.sl-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255, 213, 3, 0.45); }
+.sl-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.sl-btn--primary { background: var(--sl-color-brand); color: var(--sl-color-text-on-brand); }
+.sl-btn--primary:hover { background: var(--sl-color-brand-hover); }
+.sl-btn--primary:active { background: var(--sl-color-brand-active); }
+
+.sl-btn--secondary { background: var(--sl-color-ink); color: var(--sl-color-text-inverse); }
+.sl-btn--secondary:hover { background: #1f1c19; }
+
+.sl-btn--outline { background: transparent; color: var(--sl-color-ink); border-color: var(--sl-color-border-strong); }
+.sl-btn--outline:hover { background: var(--sl-color-surface-sand); }
+
+.sl-btn--ghost { background: transparent; color: var(--sl-color-ink); }
+.sl-btn--ghost:hover { background: var(--sl-color-surface-sand); }
+
+.sl-btn--pill { border-radius: var(--sl-radius-pill); }
+.sl-btn--sm { padding: 8px 16px; font-size: var(--sl-text-sm); }
+.sl-btn--lg { padding: 16px 32px; font-size: var(--sl-text-lg); }
+
+/* Badge ------------------------------------------------------------------ */
+.sl-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: var(--sl-radius-pill);
+  font-size: var(--sl-text-sm); font-weight: var(--sl-weight-medium);
+  background: var(--sl-color-surface-sand); color: var(--sl-color-ink);
+}
+.sl-badge--brand   { background: var(--sl-color-brand); color: var(--sl-color-text-on-brand); }
+.sl-badge--soft    { background: var(--sl-color-brand-soft); color: var(--sl-color-ink); }
+.sl-badge--outline { background: transparent; border: 1px solid var(--sl-color-border); color: var(--sl-color-text-muted); }
+.sl-badge--success { background: rgba(79,157,105,0.12); color: var(--sl-color-success); }
+
+/* Card ------------------------------------------------------------------- */
+.sl-card {
+  background: var(--sl-color-bg); border: 1px solid var(--sl-color-border);
+  border-radius: var(--sl-radius-xl); padding: var(--sl-space-6);
+  box-shadow: var(--sl-shadow-sm);
+  transition: box-shadow var(--sl-duration) var(--sl-ease),
+              transform var(--sl-duration) var(--sl-ease);
+}
+.sl-card--hover:hover { box-shadow: var(--sl-shadow-lg); transform: translateY(-2px); }
+.sl-card--sand { background: var(--sl-color-surface-sand); border-color: transparent; box-shadow: none; }
+.sl-card--dark { background: var(--sl-color-surface-dark); border-color: transparent; color: var(--sl-color-text-on-dark); }
+.sl-card--dark .sl-h3 { color: #fff; }
+.sl-card__title { margin: 0 0 8px; }
+.sl-card__body  { color: var(--sl-color-text-muted); font-size: var(--sl-text-base); line-height: var(--sl-leading-relaxed); }
+
+/* Icon chip -------------------------------------------------------------- */
+.sl-iconchip {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: var(--sl-radius-lg);
+  background: var(--sl-color-surface-sand); color: var(--sl-color-ink);
+}
+.sl-iconchip--brand { background: var(--sl-color-brand); }
+
+/* Input ------------------------------------------------------------------ */
+.sl-field { display: flex; flex-direction: column; gap: 6px; }
+.sl-label { font-size: var(--sl-text-sm); font-weight: var(--sl-weight-medium); color: var(--sl-color-ink); }
+.sl-input {
+  font-family: var(--sl-font-sans); font-size: var(--sl-text-base);
+  color: var(--sl-color-ink); background: var(--sl-color-bg);
+  padding: 12px 14px; border: 1px solid var(--sl-color-border);
+  border-radius: var(--sl-radius-md); width: 100%;
+  transition: border-color var(--sl-duration-fast) var(--sl-ease),
+              box-shadow var(--sl-duration-fast) var(--sl-ease);
+}
+.sl-input::placeholder { color: var(--sl-color-text-subtle); }
+.sl-input:focus { outline: none; border-color: var(--sl-color-brand);
+  box-shadow: 0 0 0 3px rgba(255, 213, 3, 0.35); }
+.sl-hint { font-size: var(--sl-text-xs); color: var(--sl-color-text-subtle); }
+
+/* Checklist item (mirrors site feature lists) ---------------------------- */
+.sl-check { display: flex; align-items: center; gap: 10px; color: var(--sl-color-text-muted); font-size: var(--sl-text-base); }
+.sl-check__mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; flex: 0 0 20px; border-radius: var(--sl-radius-pill);
+  background: var(--sl-color-ink); color: #fff; font-size: 12px;
+}
+
+/* Layout helpers --------------------------------------------------------- */
+.sl-container { max-width: var(--sl-container); margin: 0 auto; padding: 0 24px; }
+.sl-section { padding: var(--sl-space-24) 0; }
+.sl-section--sand { background: var(--sl-color-surface-sand); }
+.sl-section--dark { background: var(--sl-color-surface-dark); color: var(--sl-color-text-on-dark); }
+
+/* Navbar (floating pill — matches site header) --------------------------- */
+.sl-navbar {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--sl-color-bg); border-radius: var(--sl-radius-pill);
+  box-shadow: var(--sl-shadow-md); padding: 12px 16px 12px 24px;
+  max-width: var(--sl-container); margin: 16px auto;
+}
+.sl-navbar__links { display: flex; align-items: center; gap: 28px; }
+.sl-navbar__link { color: var(--sl-color-ink); font-weight: var(--sl-weight-medium); font-size: var(--sl-text-base); text-decoration: none; }
+.sl-navbar__link:hover { color: var(--sl-color-text-subtle); }
+
+/* Brand wordmark --------------------------------------------------------- */
+.sl-logo { display: inline-flex; align-items: center; gap: 10px; font-weight: var(--sl-weight-semibold); font-size: 20px; color: var(--sl-color-ink); }
+.sl-logo__mark {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: var(--sl-color-brand); display: inline-flex;
+  align-items: center; justify-content: center; color: var(--sl-color-ink);
+}
