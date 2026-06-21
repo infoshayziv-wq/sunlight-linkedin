@@ -24,7 +24,7 @@ const STATE_META = {
 function StatePill({ post }) {
   if (post.status === "approval") {
     return <span className="sl-badge" style={{ font: "500 12px var(--sl-font-sans)" }}>
-      <CIcon name="keyOutline" size={13} /> {CUI.missingKeyText(post)}</span>;
+      <CIcon name="thumbsUp" size={13} /> {CUI.missingKeyText(post)}</span>;
   }
   const m = STATE_META[post.status];
   return <span className={"sl-badge " + m.cls} style={{ font: "500 12px var(--sl-font-sans)" }}>{m.label}</span>;
@@ -32,7 +32,7 @@ function StatePill({ post }) {
 
 function waitingLabel(post) {
   if (!post.waitingOn) return null;
-  const map = { guy: "Guy's intent key", nyx: post.status === "approval" ? "Nyx's quality key" : "Nyx to edit", mika: "Mika", shay: "Admin" };
+  const map = { guy: "Guy's approval", nyx: post.status === "approval" ? "Nyx's approval" : "Nyx to edit", mika: "Mika", shay: "Admin" };
   return map[post.waitingOn] || CUSERS[post.waitingOn]?.name;
 }
 

@@ -67,7 +67,7 @@ function App() {
         const np = recompute({ ...p, [kind === "intent" ? "intentKey" : "qualityKey"]: k });
         return np;
       }));
-      toast(kind === "intent" ? "Intent key applied — you stand behind this." : "Quality key applied — editorially ready.");
+      toast(kind === "intent" ? "Approved — you stand behind this." : "Approved — editorially ready.");
     },
     handOff: (id, note) => {
       setPosts((ps) => ps.map((p) => p.id === id ? {
@@ -120,7 +120,7 @@ function App() {
         <div style={{ position: "sticky", top: 0, zIndex: 40, padding: "16px 24px", background: "linear-gradient(var(--sl-color-surface-warm) 70%, transparent)" }}>
           <nav className="sl-navbar" style={{ maxWidth: 1200, margin: "0 auto", paddingRight: 12 }}>
             <button onClick={() => navigate("home")} style={{ border: "none", background: "none", cursor: "pointer", padding: 0 }}>
-              <DS.Logo label="Sunlight Studio" />
+              <DS.Logo label="Sunlight LinkedIn Studio" />
             </button>
             <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
               <div className="sl-navbar__links" style={{ gap: 4 }}>

@@ -17,13 +17,12 @@ function SectionLabel({ children, icon }) {
 
 // ---- Key indicator ------------------------------------------------------
 function KeyPill({ kind, who, applied, actionable, onApply }) {
-  const label = kind === "intent" ? "Intent" : "Quality";
   const person = kind === "intent" ? "Guy" : "Nyx";
   if (applied) {
     return (
-      <span className="sl-badge sl-badge--success" title={`${label} key · ${USERS_NAME(who.who)} · ${who.when}`}
+      <span className="sl-badge sl-badge--success" title={`Approved by ${USERS_NAME(who.who)} · ${who.when}`}
         style={{ gap: 6, padding: "7px 13px", font: "600 13px var(--sl-font-sans)" }}>
-        <SWMIcon name="check" size={14} /> {label} · {person}
+        <SWMIcon name="check" size={14} /> Approved · {person}
       </span>
     );
   }
@@ -32,14 +31,14 @@ function KeyPill({ kind, who, applied, actionable, onApply }) {
       <button onClick={onApply} className="sl-badge"
         style={{ cursor: "pointer", padding: "7px 14px", font: "600 13px var(--sl-font-sans)",
           background: "var(--sl-color-ink)", color: "#fff", border: "1px solid var(--sl-color-ink)" }}>
-        <SWMIcon name="key" size={14} /> Apply your {label.toLowerCase()} key
+        <SWMIcon name="thumbsUp" size={14} /> Approve
       </button>
     );
   }
   return (
     <span className="sl-badge sl-badge--outline" style={{ padding: "7px 13px", font: "500 13px var(--sl-font-sans)",
       color: "var(--sl-color-text-subtle)", borderStyle: "dashed" }}>
-      <SWMIcon name="keyOutline" size={14} /> Awaiting {person}'s {label.toLowerCase()} key
+      <SWMIcon name="thumbsUp" size={14} /> Awaiting {person}'s approval
     </span>
   );
 }
@@ -72,12 +71,12 @@ function visualResolved(post) { return post.noVisual || !!post.visualLink; }
 function isReady(post) { return keysSatisfied(post) && visualResolved(post); }
 function missingKeyText(post) {
   if (post.contentType === "guy-personal") {
-    if (!post.intentKey && !post.qualityKey) return "Awaiting both keys";
-    if (!post.intentKey) return "Awaiting Guy's intent key";
-    if (!post.qualityKey) return "Awaiting editor's quality key";
-  } else if (!post.qualityKey) return "Awaiting editor's quality key";
+    if (!post.intentKey && !post.qualityKey) return "Awaiting both approvals";
+    if (!post.intentKey) return "Awaiting Guy's approval";
+    if (!post.qualityKey) return "Awaiting Nyx's approval";
+  } else if (!post.qualityKey) return "Awaiting Nyx's approval";
   if (!visualResolved(post)) return "Awaiting visual";
-  return "Both keys in — ready to go live";
+  return "Both approvals in — ready to go live";
 }
 
 // ---- Status icon row ----------------------------------------------------
@@ -95,8 +94,8 @@ function StatusRow({ post, size = 15 }) {
   );
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
-      {item("key", `${keysIn}/${keysTotal} keys`, keysIn === keysTotal ? "var(--sl-color-success)" : null,
-        `${keysIn} of ${keysTotal} keys in`)}
+      {item("thumbsUp", `${keysIn}/${keysTotal} approved`, keysIn === keysTotal ? "var(--sl-color-success)" : null,
+        `${keysIn} of ${keysTotal} approvals in`)}
       {visualResolved(post)
         ? item("link", post.noVisual ? "No visual needed" : "Visual linked", null,
             post.noVisual ? "No visual needed" : "Visual reference linked")

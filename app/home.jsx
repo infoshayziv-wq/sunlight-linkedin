@@ -40,15 +40,15 @@ function GuyHome({ store }) {
   return (
     <div style={{ maxWidth: 820, margin: "0 auto", padding: "8px 0 80px" }}>
       <Greeting user={HUSERS.guy} sub={awaitingKey.length
-        ? `${awaitingKey.length} post${awaitingKey.length > 1 ? "s" : ""} waiting on your intent key.`
-        : "Nothing waiting on your key. Got an idea?"} />
+        ? `${awaitingKey.length} post${awaitingKey.length > 1 ? "s" : ""} waiting on your approval.`
+        : "Nothing waiting on your approval. Got an idea?"} />
 
       <button className="sl-btn sl-btn--primary sl-btn--lg" onClick={() => store.navigate("generate")}
         style={{ marginBottom: 32, boxShadow: "var(--sl-shadow-brand)" }}>
         <HIcon name="plus" size={18} /> New post
       </button>
 
-      <HomeSection title="Awaiting your intent key" count={awaitingKey.length}>
+      <HomeSection title="Awaiting your approval" count={awaitingKey.length}>
         {awaitingKey.length === 0
           ? <HUI.EmptyState icon="check" title="All clear" body="Nothing needs your sign-off right now." />
           : <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -56,7 +56,7 @@ function GuyHome({ store }) {
                 <HPCard key={p.id} post={p} onOpen={() => open(p)} controls={
                   <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid var(--sl-color-border)", display: "flex", gap: 10 }}>
                     <button className="sl-btn sl-btn--secondary sl-btn--sm" onClick={() => store.applyKey(p.id, "intent")}>
-                      <HIcon name="key" size={14} /> Apply intent key
+                      <HIcon name="thumbsUp" size={14} /> Approve
                     </button>
                     <button className="sl-btn sl-btn--ghost sl-btn--sm" onClick={() => open(p)} style={{ color: "var(--sl-color-text-muted)" }}>
                       Read it first <HIcon name="arrowRight" size={14} />
@@ -111,7 +111,7 @@ function NyxHome({ store }) {
       </HomeSection>
 
       {awaitingKey.length > 0 && (
-        <HomeSection title="Awaiting your quality key" count={awaitingKey.length}>
+        <HomeSection title="Awaiting your approval" count={awaitingKey.length}>
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
             {awaitingKey.map((p) => <HPCard key={p.id} post={p} onOpen={() => open(p)} />)}
           </div>

@@ -159,6 +159,8 @@ function EditorScreen() {
               Click any line to edit directly. {ph > 0 ? `Click a 〔placeholder〕 to drop in the real value.` : "Saved automatically, every meaningful change versioned."}
             </p>
           )}
+
+          {post.status === "draft" && isAuthor && <RefineRail store={store} post={post} />}
         </div>
 
         {/* RAIL */}
@@ -297,3 +299,113 @@ function PostedDialog({ open, onClose, post, onConfirm, ph }) {
 }
 
 window.EditorScreen = EditorScreen;
+
+// ---- Refine with the brain (conversational refinement on a kept draft) ----
+const REFINE_T = window.SWM.T, REFINE_MF = window.SWM.MF;
+function refine(body, instr) {
+  const t = instr.toLowerCase();
+  const isStr = (p) => typeof p === "string";
+  const firstSentence = (s) => s.split(/(?<=[.!?])\s+/)[0];
+
+  if (/\b(add|number|stat|figure|float|data|percent|%|customer|client|name|quote|metric|proof)\b/.test(t)) {
+    const nb = body.slice();
+    nb.splice(Math.min(1, nb.length), 0, [REFINE_T("Worth anchoring with a real number here — "), REFINE_MF("figure"), REFINE_T(".")]);
+    return { body: nb, reply: "That leans on a fact I don't have. I've left the spot marked — drop in the real figure, or it travels as a clearly-marked placeholder. I won't guess." };
+  }
+  if (/\b(end|ending|close|closing|final|last)\b/.test(t)) {
+    const pool = ["That's the whole game.", "The rest is just detail.", "Everything else is noise."];
+    const nb = body.map((p, i) => (i === body.length - 1 && isStr(p)) ? pool[Math.floor(Math.random() * pool.length)] : p);
+    return { body: nb, reply: "Sharpened the close — the last line lands harder now." };
+  }
+  if (/\b(open|opening|hook|start|first|lede|lead|intro)\b/.test(t)) {
+    const nb = body.slice();
+    for (let i = 0; i < nb.length; i++) { if (isStr(nb[i])) { nb[i] = firstSentence(nb[i]); break; } }
+    return { body: nb, reply: "Reworked the open to start straight on the tension." };
+  }
+  if (/\b(short|shorter|tighten|trim|concise|cut|punch|punchy|crisp|brief|less|cleaner)\b/.test(t)) {
+    const nb = body.map((p) => isStr(p) ? firstSentence(p) : p);
+    return { body: nb, reply: "Tightened throughout — cut the slack, kept the idea." };
+  }
+  let li = -1, ll = 0;
+  body.forEach((p, i) => { if (isStr(p) && p.length > ll) { ll = p.length; li = i; } });
+  const nb = body.map((p, i) => i === li ? firstSentence(p) : p);
+  return { body: nb, reply: "Eased the rhythm and trimmed a couple of words. Tell me where to push harder." };
+}
+
+function RefineRail({ store, post }) {
+  const [msgs, setMsgs] = React.useState([{ who: "brain",
+    text: "Kept. Tell me how to sharpen it — shorter, a punchier close, a stronger open. I'll keep it in Guy's voice, and I won't invent a fact." }]);
+  const [val, setVal] = React.useState("");
+  const [busy, setBusy] = React.useState(false);
+  const scroller = React.useRef(null);
+  const stamp = () => "2026-06-21 " + new Date().toTimeString().slice(0, 5);
+
+  React.useEffect(() => { if (scroller.current) scroller.current.scrollTop = scroller.current.scrollHeight; }, [msgs, busy]);
+
+  function send(text) {
+    const instr = (text != null ? text : val).trim();
+    if (!instr || busy) return;
+    setVal("");
+    setMsgs((m) => [...m, { who: "user", text: instr }]);
+    setBusy(true);
+    setTimeout(() => {
+      const { body, reply } = refine(post.body, instr);
+      store.updatePost(post.id, {
+        body,
+        versions: [{ id: "v" + (post.versions.length + 1), who: store.user.id, when: stamp(),
+          note: 'Refined: "' + (instr.length > 38 ? instr.slice(0, 38) + "…" : instr) + '"' }, ...post.versions],
+      });
+      setMsgs((m) => [...m, { who: "brain", text: reply }]);
+      setBusy(false);
+    }, 1300);
+  }
+
+  const chips = ["Make it shorter", "Punchier ending", "Stronger open", "Add a real number"];
+
+  return (
+    <div className="sl-card" style={{ padding: 20, marginTop: 20 }}>
+      <EUI.SectionLabel icon="pencil">Refine with the brain</EUI.SectionLabel>
+      <div ref={scroller} style={{ display: "flex", flexDirection: "column", gap: 12, margin: "14px 0", maxHeight: 320, overflow: "auto" }}>
+        {msgs.map((m, i) => m.who === "brain" ? (
+          <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+            <EUI.Avatar id="nyx" size={26} />
+            <div className="sl-card sl-card--sand" style={{ padding: "10px 14px", maxWidth: "85%" }}>
+              <p style={{ margin: 0, font: "400 14px/1.5 var(--sl-font-sans)", color: "var(--sl-color-text-muted)" }}>{m.text}</p>
+            </div>
+          </div>
+        ) : (
+          <div key={i} style={{ display: "flex", justifyContent: "flex-end" }}>
+            <div style={{ padding: "10px 14px", borderRadius: 12, background: "var(--sl-color-brand-soft)", maxWidth: "85%",
+              font: "400 14px/1.5 var(--sl-font-sans)", color: "var(--sl-color-ink)" }}>{m.text}</div>
+          </div>
+        ))}
+        {busy && (
+          <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+            <EUI.Avatar id="nyx" size={26} />
+            <div className="sl-card sl-card--sand" style={{ padding: "12px 16px", display: "flex", gap: 6 }}>
+              <span className="swm-breathe" style={{ width: 8, height: 8, borderRadius: 9999, background: "var(--sl-color-brand)" }} />
+              <span style={{ font: "400 13px var(--sl-font-sans)", color: "var(--sl-color-text-subtle)" }}>Reworking in Guy's voice…</span>
+            </div>
+          </div>
+        )}
+      </div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 12 }}>
+        {chips.map((c) => (
+          <button key={c} onClick={() => send(c)} disabled={busy} className="sl-badge sl-badge--outline"
+            style={{ cursor: busy ? "default" : "pointer", font: "500 12.5px var(--sl-font-sans)", padding: "7px 13px", opacity: busy ? 0.5 : 1 }}>{c}</button>
+        ))}
+      </div>
+      <div style={{ display: "flex", gap: 8 }}>
+        <input className="sl-input" value={val} onChange={(e) => setVal(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter") send(); }} disabled={busy}
+          placeholder="Tell the brain how to refine it…" style={{ font: "400 14px var(--sl-font-sans)" }} />
+        <button className="sl-btn sl-btn--primary sl-btn--sm" onClick={() => send()} disabled={busy}>
+          <EIcon name="send" size={15} />
+        </button>
+      </div>
+      <p style={{ font: "400 12px/1.45 var(--sl-font-sans)", color: "var(--sl-color-text-subtle)", margin: "12px 0 0" }}>
+        Each refinement is a new version — restore any earlier take. Ask for a fact it doesn't have and it marks the gap, never invents.
+      </p>
+    </div>
+  );
+}

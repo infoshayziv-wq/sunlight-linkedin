@@ -229,7 +229,7 @@ Any other specific stat / client / quote \u2192 stop and ask.`,
       ],
       comments: [],
       versions: [
-        { id: "v2", who: "nyx", when: "2026-06-20 16:00", note: "Editorial pass + quality key" },
+        { id: "v2", who: "nyx", when: "2026-06-20 16:00", note: "Editorial pass + approval" },
         { id: "v1", who: "guy", when: "2026-06-19 11:20", note: "Handed off from Generate" },
       ],
     },
@@ -252,7 +252,7 @@ Any other specific stat / client / quote \u2192 stop and ask.`,
         { id: "c3", author: "mika", anchor: null, body: "This one's been waiting on Guy's key for two days \u2014 nudged.", resolved: false, replies: [] },
       ],
       versions: [
-        { id: "v2", who: "nyx", when: "2026-06-19 14:35", note: "Editorial pass + quality key" },
+        { id: "v2", who: "nyx", when: "2026-06-19 14:35", note: "Editorial pass + approval" },
         { id: "v1", who: "guy", when: "2026-06-18 08:50", note: "Handed off from Generate" },
       ],
     },
@@ -293,7 +293,7 @@ Any other specific stat / client / quote \u2192 stop and ask.`,
       ],
       comments: [],
       versions: [
-        { id: "v2", who: "nyx", when: "2026-06-20 17:50", note: "Editorial pass + quality key" },
+        { id: "v2", who: "nyx", when: "2026-06-20 17:50", note: "Editorial pass + approval" },
         { id: "v1", who: "guy", when: "2026-06-19 10:10", note: "Handed off from Generate" },
       ],
     },
@@ -342,7 +342,7 @@ Any other specific stat / client / quote \u2192 stop and ask.`,
 
   // --- Notifications -----------------------------------------------------
   const NOTES = [
-    { id: "n1", type: "key-needed", to: "guy",  text: "2 posts are waiting on your intent key.", when: "9:02" },
+    { id: "n1", type: "key-needed", to: "guy",  text: "2 posts are waiting on your approval.", when: "9:02" },
     { id: "n2", type: "handoff",    to: "nyx",  text: "Guy handed off \u201cThe rebate your buyers never ask for.\u201d", when: "8:31" },
     { id: "n3", type: "ping",       to: "guy",  text: "Mika nudged you on \u201cWhat checks actually cost you.\u201d", when: "8:45" },
   ];
